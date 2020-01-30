@@ -1,0 +1,15 @@
+action_comedy.jpg
+action.jpg
+adventure.jpg
+animation.jpg
+comedy.jpg
+comedy_romance.jpg
+crime.jpg
+drama.jpg
+fantasy.jpg
+horror.jpg
+mystery.jpg
+romance.jpg
+sci_fi.jpg
+superhero.jpg
+thriller.jpg
