@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/blocs/home/homeBloc.dart';
 import 'package:movie_app/blocs/home/homeEvent.dart';
 import 'package:movie_app/blocs/home/homeState.dart';
-import 'package:movie_app/data_layer/repository.dart';
 
 import 'package:movie_app/ui/general/posterRoll.dart';
 import 'package:movie_app/ui/general/slideshow.dart';
@@ -36,7 +34,6 @@ class MovieWidget extends StatelessWidget {
         Widget comingSoon = Center(child: CircularProgressIndicator());
         Widget topRatedMovies = Center(child: CircularProgressIndicator());
 
-        Widget divide = Divider(height: MediaQuery.of(context).size.height/4,);
         if (state is MoviesLoaded) {
           trending = Slideshow(data: state.trending,);
           popularMovies = PosterRoll(data: state.popularMovies, title: "Most Popular Movies"); //X

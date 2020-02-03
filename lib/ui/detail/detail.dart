@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/blocs/home/homeBloc.dart';
 import 'package:movie_app/blocs/home/homeEvent.dart';
 import 'package:movie_app/blocs/home/homeState.dart';
-import 'package:movie_app/data_layer/serializer/tvShowSerialzier/tv_detail.dart';
-import 'package:movie_app/ui/general/detail/widgets.dart';
+import 'package:movie_app/ui/detail/widgets.dart';
 import 'package:movie_app/ui/general/posterRoll.dart';
 
 class Detail extends StatelessWidget {

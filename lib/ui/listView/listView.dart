@@ -14,14 +14,14 @@ class Listed extends StatelessWidget {
 
     return BlocProvider<HomeBloc>(
       builder: (context) =>
-          HomeBloc()..dispatch(ListStarted(type: select_type(loadIdentifier))),
+          HomeBloc()..dispatch(ListStarted(type: selectType(loadIdentifier))),
       child: ListContent(loadIdentifier.values.first),
     );
   }
 }
 
 class ListContent extends StatelessWidget {
-  var title;
+  final title;
 
   ListContent(this.title);
 
@@ -197,7 +197,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var genre_cards = genres
+    var genreCards = genres
         .map((x) => x.name)
         .map<Widget>((x) => Card(
               child: Padding(
@@ -230,7 +230,7 @@ class Header extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 16,
             child: ListView(
-                scrollDirection: Axis.horizontal, children: genre_cards),
+                scrollDirection: Axis.horizontal, children: genreCards),
           )
         ],
       ),
@@ -238,7 +238,7 @@ class Header extends StatelessWidget {
   }
 }
 
-select_type(Map<String, String> loadIdentifier) {
+selectType(Map<String, String> loadIdentifier) {
   switch (loadIdentifier["state"]) {
     case "Home Page Loaded":
       {
@@ -267,7 +267,6 @@ select_type(Map<String, String> loadIdentifier) {
           return "MG";
         }
       }
-      ;
       break;
     case "Tv Page Loaded":
       {

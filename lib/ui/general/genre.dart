@@ -46,8 +46,8 @@ class Genres extends StatelessWidget {
 }
 
 class GenreImgCard extends StatelessWidget {
-  String genreName1;
-  String genreName2;
+  final String genreName1;
+  final String genreName2;
 
   GenreImgCard(this.genreName1, this.genreName2);
 

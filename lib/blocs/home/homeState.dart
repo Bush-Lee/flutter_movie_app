@@ -110,3 +110,13 @@ class ListLoaded extends AppState {
   @override
   String toString() => 'list loaded with data: $data ';
 }
+
+class SearchLoaded extends AppState {
+  final genres;
+
+  SearchLoaded({@required this.genres});
+
+  @override
+  String toString() => 'list loaded with data: ';
+}
+

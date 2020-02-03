@@ -31,13 +31,10 @@ class HomeWidget extends StatelessWidget {
         Widget posterRoll = Center(child: CircularProgressIndicator());
         Widget genres = Center(child: CircularProgressIndicator());
 
-        Widget divide = Divider(height: MediaQuery.of(context).size.height/4,);
         if (state is HomeLoaded) {
-//          slideShow = Slideshow(data: state.slideshow, bloc: homeBloc,);
           slideShow = Slideshow(data: state.slideshow);
           posterRoll = PosterRoll(data: state.posterRoll, title: "Popular Movies");
           genres = Genres(data: state.genres);
-          divide = Divider();
         }
 
         return ListView(

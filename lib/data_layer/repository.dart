@@ -26,9 +26,9 @@ class Repository {
 
 
   fetchGenres() => _apiProvider.fetchGenresList();
-  fetchGenreImgPaths() => genre_paths().then((value) => value);
+  fetchGenreImgPaths() => genrePaths().then((value) => value);
 
-  Future genre_paths() async {
+  Future genrePaths() async {
     var imgFiles = await rootBundle.loadString("assets/images/movie_genre/file_names.txt");
     var imgNames = imgFiles.split("\n");
 

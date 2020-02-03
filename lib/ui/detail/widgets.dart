@@ -1,6 +1,6 @@
 import 'package:movie_app/data_layer/serializer/general/genre.dart';
 
-import '../titleBar.dart';
+import 'package:movie_app/ui/general/titleBar.dart';
 import 'package:flutter/material.dart';
 
 class DetailTitle extends StatelessWidget {

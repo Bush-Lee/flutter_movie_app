@@ -46,3 +46,8 @@ class ListStarted extends AppEvent {
   @override
   String toString() => "Tv  page started loadin ";
 }
+
+class SearchStarted extends AppEvent {
+  @override
+  String toString() => "Search started loadin ";
+}

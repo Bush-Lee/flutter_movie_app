@@ -56,7 +56,7 @@ class Cast {
 }
 
 class Crew {
-  final String credit_id;
+  final String creditId;
   final String department;
   final dynamic gender;
   final int id;
@@ -65,7 +65,7 @@ class Crew {
   final dynamic profilePath;
 
   Crew(
-      {this.credit_id,
+      {this.creditId,
       this.department,
       this.gender,
       this.id,
@@ -75,7 +75,7 @@ class Crew {
 
   factory Crew.fromJson(Map<dynamic, dynamic> json) {
     return Crew(
-      credit_id: json["credit_id"],
+      creditId: json["credit_id"],
       department: json["department"],
       gender: json["gender"],
       id: json["id"],

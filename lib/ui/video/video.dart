@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/blocs/home/homeBloc.dart';
 import 'package:movie_app/blocs/home/homeEvent.dart';
 import 'package:movie_app/blocs/home/homeState.dart';
-import 'package:movie_app/ui/general/detail/detail.dart';
+import 'package:movie_app/ui/detail/detail.dart';
 
 class VideoPlayer extends StatelessWidget {
   @override
