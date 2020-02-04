@@ -1,7 +1,7 @@
 import '../general/genre.dart';
 
 class ListMovie {
-  List<MovieModelShort> _listMovies;
+  List<MovieModelShort> listMovies;
   ListMovie();
 
   ListMovie.fromJson(Map<dynamic, dynamic> json, List<GenreModel> genre) {
@@ -11,12 +11,12 @@ class ListMovie {
       temp.add(result);
     }
 
-    _listMovies = temp;
+    listMovies = temp;
   }
-  List<MovieModelShort> get listMovie => _listMovies;
+  List<MovieModelShort> get listMovie => listMovies;
 }
 
-class   MovieModelShort {
+class MovieModelShort {
   final bool video;
   final int voteCount;
   final dynamic voteAverage; // Sometimes flutter reads it as int sometimes as double.

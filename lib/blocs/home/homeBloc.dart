@@ -137,5 +137,11 @@ class HomeBloc extends Bloc<AppEvent, AppState> {
       var genres = await repo.fetchGenres();
       yield SearchLoaded(genres: genres);
     }
+
+    if (event is GetSearchResults) {
+      var results = await repo.fetchSearch(event.searchParams);
+      var genres = await repo.fetchGenres();
+      yield GotSearchResult(searchResults: results);
+    }
   }
 }

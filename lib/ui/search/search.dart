@@ -25,7 +25,7 @@ class SearchBar extends StatelessWidget {
         bloc: bloc,
         builder: (BuildContext context, AppState state) {
           if (state is SearchLoaded) {
-            var body = SearchBarBody(
+            var body = SearchBody(
               genres: state.genres,
             );
             return Scaffold(
@@ -46,7 +46,7 @@ class SearchBar extends StatelessWidget {
                   FlatButton(
                     child: Text("CLEAR"),
                     onPressed: () {
-                      body.initParams();
+                      body.reset();
                     },
                   ),
                   SizedBox(
@@ -56,8 +56,11 @@ class SearchBar extends StatelessWidget {
                         color: Colors.yellow,
                         textColor: Colors.black,
                         child: Text("SEE RESULTS"),
-                        onPressed: () => body.search.show()),
-                  )
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/Listed", arguments: body.search);
+                          },
+                    )
+                  ),
                 ],
               ),
             );
@@ -67,16 +70,17 @@ class SearchBar extends StatelessWidget {
   }
 }
 
-class SearchBarBody extends StatefulWidget {
+class SearchBody extends StatefulWidget {
   final genres;
 
-  SearchBarBody({this.genres});
+  SearchBody({this.genres});
 
   Map typeCards;
   Map voteCntCards;
   Map voteAvg;
   Map genreDict;
   SearchParams search;
+  SearchBodyState state;
 
   void initParams() {
     search = SearchParams();
@@ -96,14 +100,26 @@ class SearchBarBody extends StatefulWidget {
         Map.fromIterable(genres, key: (v) => v.name, value: (v) => false);
   }
 
+  void reset () {
+    initParams();
+    state.reset();
+  }
+
   @override
   State<StatefulWidget> createState() {
     initParams();
-    return SearchBarBodyState();
+    state = SearchBodyState();
+    return state;
   }
 }
 
-class SearchBarBodyState extends State<SearchBarBody> {
+class SearchBodyState extends State<SearchBody> {
+  void reset() {
+    setState(() {
+
+    });
+  }
+
   void selectType({dynamic activeKey}) {
     setState(() {
       widget.typeCards.keys
@@ -138,8 +154,8 @@ class SearchBarBodyState extends State<SearchBarBody> {
   void selectGenre({dynamic activeKey}) {
     setState(() {
       widget.genreDict[activeKey] = !widget.genreDict[activeKey];
-    });
 
+    });
   }
 
   @override

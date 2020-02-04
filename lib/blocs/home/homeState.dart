@@ -117,6 +117,14 @@ class SearchLoaded extends AppState {
   SearchLoaded({@required this.genres});
 
   @override
-  String toString() => 'list loaded with data: ';
+  String toString() => 'Search is done loading';
 }
 
+class GotSearchResult extends AppState {
+  final searchResults;
+
+  GotSearchResult({@required this.searchResults}) : super([searchResults]);
+
+  @override
+  String toString() => 'the result is dont ${searchResults.show().toString()}';
+}

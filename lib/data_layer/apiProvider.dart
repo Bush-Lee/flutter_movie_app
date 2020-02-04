@@ -272,7 +272,7 @@ class ApiProvider {
   //endregion
 
   //region Search
-Future<dynamic> fetchSearch(SearchParams searchParams, String sortBy) async {
+Future<dynamic> fetchSearch(SearchParams searchParams, {String sortBy}) async {
   final genreTypes = await fetchGenresList();
   if (searchParams.keyWord != null) {
     try {

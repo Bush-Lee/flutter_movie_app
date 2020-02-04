@@ -9,13 +9,20 @@ import 'package:movie_app/data_layer/serializer/tvShowSerialzier/tv_list.dart';
 class Listed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, String> loadIdentifier =
+    var loadIdentifier =
         ModalRoute.of(context).settings.arguments;
 
+    if (loadIdentifier is Map) {
+      return BlocProvider<HomeBloc>(
+        builder: (context) =>
+        HomeBloc()..dispatch(ListStarted(type: selectType(loadIdentifier))),
+        child: ListContent(loadIdentifier.values.first),
+      );
+    }
     return BlocProvider<HomeBloc>(
       builder: (context) =>
-          HomeBloc()..dispatch(ListStarted(type: selectType(loadIdentifier))),
-      child: ListContent(loadIdentifier.values.first),
+      HomeBloc()..dispatch(GetSearchResults(searchParams: loadIdentifier)),
+      child: ListContent("Search Results"),
     );
   }
 }
@@ -33,12 +40,46 @@ class ListContent extends StatelessWidget {
       builder: (BuildContext context, AppState state) {
         if (state is ListLoaded) {
           List<Widget> listEl = [
-            Header(state.genres, title),
+            Header(genres: state.genres, title: title),
           ];
           for (int i = 0; i < state.data.length; i++) {
             if (state.data[i].posterPath != null) {
               listEl.add(
                   ContentCard(data: state.data[i], number: i, title: title));
+            }
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+            body: Container(
+                color: Color(0XFF1C1C1C),
+                child: ListView(
+                  children: listEl,
+                )),
+          );
+        }
+
+        if (state is GotSearchResult) {
+          List<Widget> listEl = [
+            Header(title: title),
+          ];
+
+          var results;
+          if ( state.searchResults is ListMovie) {
+            results = state.searchResults.listMovies;
+          } else {
+            results = state.searchResults.tvList;
+          }
+
+          for (int i = 0; i < results.length; i++) {
+            if (results[i].posterPath != null) {
+              listEl.add(
+                  ContentCard(data: results[i], number: i, title: title));
             }
           }
 
@@ -190,28 +231,40 @@ class ContentCard extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
-  final genres;
+  var genres;
   final title;
 
-  Header(this.genres, this.title);
+  Header({this.genres, this.title});
 
   @override
   Widget build(BuildContext context) {
-    var genreCards = genres
-        .map((x) => x.name)
-        .map<Widget>((x) => Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text(x)),
-              ),
-              color: Color(0XFF1C1C1C),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  side: BorderSide(
-                    color: Color(0XFF3E3E3E),
-                  )),
-            ))
-        .toList();
+    Widget cards = Container();
+
+    if (genres != null) {
+      var genreCards = genres
+          .map((x) => x.name)
+          .map<Widget>((x) => Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text(x)),
+        ),
+        color: Color(0XFF1C1C1C),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+            side: BorderSide(
+              color: Color(0XFF3E3E3E),
+            )),
+      ))
+          .toList();
+
+      cards = Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 16,
+        child: ListView(
+            scrollDirection: Axis.horizontal, children: genreCards),
+      );
+    }
+
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -225,13 +278,7 @@ class Header extends StatelessWidget {
               style: TextStyle(fontSize: 25),
             ),
           ),
-//          Divider(color: Color(0xFF383838),),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 16,
-            child: ListView(
-                scrollDirection: Axis.horizontal, children: genreCards),
-          )
+          cards,
         ],
       ),
     );

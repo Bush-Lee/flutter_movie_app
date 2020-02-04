@@ -51,3 +51,9 @@ class SearchStarted extends AppEvent {
   @override
   String toString() => "Search started loadin ";
 }
+
+class GetSearchResults extends AppEvent {
+  final searchParams;
+
+  GetSearchResults({@required this.searchParams}) : super([searchParams]);
+}
